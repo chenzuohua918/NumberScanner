@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:stretchColumns="*">
+
+        <TableRow>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:background="@drawable/selector_red_corners_button"
+                android:drawableTop="@mipmap/icon_barcode"
+                android:onClick="scanBarCode"
+                android:paddingTop="25dp"
+                android:text="@string/scan_barcode"
+                android:textColor="@android:color/white"
+                android:textSize="22sp" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/selector_yellow_corners_button"
+                android:drawableTop="@mipmap/icon_qrcode"
+                android:onClick="scanQRCode"
+                android:paddingTop="25dp"
+                android:text="@string/scan_qrcode"
+                android:textColor="@android:color/white"
+                android:textSize="22sp" />
+        </TableRow>
+
+        <TableRow android:layout_marginTop="5dp">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:background="@drawable/selector_purple_corners_button"
+                android:drawableTop="@mipmap/icon_express"
+                android:onClick="scanExpress"
+                android:paddingTop="25dp"
+                android:text="@string/scan_express"
+                android:textColor="@android:color/white"
+                android:textSize="22sp" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/selector_blue_corners_button"
+                android:drawableTop="@mipmap/icon_goods"
+                android:onClick="scanGoods"
+                android:paddingTop="25dp"
+                android:text="@string/scan_goods_barcode"
+                android:textColor="@android:color/white"
+                android:textSize="22sp" />
+        </TableRow>
+    </TableLayout>
+
+</android.support.constraint.ConstraintLayout>

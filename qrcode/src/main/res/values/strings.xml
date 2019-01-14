@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">扫一扫</string>
+    <string name="appkey">a2196707ba1ea9ece745a702acd83678</string>
+
+    <string name="scan_barcode">扫描条形码</string>
+    <string name="scan_qrcode">扫描二维码</string>
+    <string name="scan_express">扫描快递单</string>
+    <string name="scan_goods_barcode">扫描商品条形码</string>
+    <string name="scan_result">扫描结果</string>
+    <string name="goods_info">商品信息</string>
+</resources>
