@@ -57,7 +57,7 @@ public class ScanGoodsBarCodeActivity extends AppCompatActivity implements QRCod
     private void change2ScanBarCode() {
         mZXingView.changeToScanBarcodeStyle();// 切换成扫描条码样式
         mZXingView.setType(BarcodeType.ONE_DIMENSION, null);// 只识别一维条码
-        //mZXingView.getScanBoxView().setOnlyDecodeScanBoxArea(true); // 仅识别扫描框中的码
+        mZXingView.getScanBoxView().setOnlyDecodeScanBoxArea(true); // 仅识别扫描框中的码
     }
 
     @Override
