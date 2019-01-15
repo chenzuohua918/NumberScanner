@@ -55,11 +55,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void scanQRCode(View view) {
-
+        startActivity(new Intent(this, ScanQRCodeActivity.class));
     }
 
     public void scanExpress(View view) {
-
+        startActivity(new Intent(this, ScanExpressActivity.class));
     }
 
     public void scanGoods(View view) {

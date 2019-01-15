@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.qrcode.R;
 import com.example.qrcode.utils.Logcat;
 
-import cn.bingoogolapple.qrcode.core.BarcodeType;
 import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zxing.ZXingView;
 
@@ -31,7 +30,6 @@ public class ScanBarCodeActivity extends AppCompatActivity implements QRCodeView
         mZXingView.startCamera();// 打开后置摄像头开始预览，但并未开始识别
         // mZXingView.startCamera(Camera.CameraInfo.CAMERA_FACING_FRONT);// 打开前置摄像头开始预览，但并未开始识别
         mZXingView.startSpotAndShowRect();// 显示扫描框，并开始识别
-        change2ScanBarCode();
     }
 
     @Override
@@ -46,19 +44,10 @@ public class ScanBarCodeActivity extends AppCompatActivity implements QRCodeView
         super.onDestroy();
     }
 
-    /**
-     * 切换为只扫描条形码
-     */
-    private void change2ScanBarCode() {
-        mZXingView.changeToScanBarcodeStyle();// 切换成扫描条码样式
-        mZXingView.setType(BarcodeType.ONE_DIMENSION, null);// 只识别一维条码
-        mZXingView.getScanBoxView().setOnlyDecodeScanBoxArea(true); // 仅识别扫描框中的码
-    }
-
     @Override
     public void onScanQRCodeSuccess(String result) {
         Logcat.d(TAG, "扫描结果为：" + result);
-        Intent intent = new Intent(this, SimpleBarCodeActivity.class);
+        Intent intent = new Intent(this, ScanBarCodeResultActivity.class);
         intent.putExtra("result", result);
         startActivity(intent);
     }

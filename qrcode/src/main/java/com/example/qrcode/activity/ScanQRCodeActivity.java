@@ -1,9 +1,10 @@
 package com.example.qrcode.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 
 import com.example.qrcode.R;
 import com.example.qrcode.utils.Logcat;
@@ -11,15 +12,15 @@ import com.example.qrcode.utils.Logcat;
 import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zxing.ZXingView;
 
-public class ScanGoodsBarCodeActivity extends AppCompatActivity implements QRCodeView.Delegate {
-    private static final String TAG = ScanGoodsBarCodeActivity.class.getSimpleName();
+public class ScanQRCodeActivity extends AppCompatActivity implements QRCodeView.Delegate {
+    private static final String TAG = ScanQRCodeActivity.class.getSimpleName();
 
     private ZXingView mZXingView;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan_goods);
+        setContentView(R.layout.activity_scan_qrcode);
 
         mZXingView = findViewById(R.id.zxingview);
         mZXingView.setDelegate(this);
@@ -48,9 +49,20 @@ public class ScanGoodsBarCodeActivity extends AppCompatActivity implements QRCod
     @Override
     public void onScanQRCodeSuccess(String result) {
         Logcat.d(TAG, "扫描结果为：" + result);
-        Intent intent = new Intent(this, GoodsInfoActivity.class);
-        intent.putExtra("result", result);
-        startActivity(intent);
+        if (!TextUtils.isEmpty(result)) {
+            if (result.startsWith("http://") || result.startsWith("https://")
+                    || result.startsWith("HTTP://") || result.startsWith("HTTPS://")) {
+                // 浏览器打开
+                Uri uri = Uri.parse(result);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+                finish();
+            } else {
+                Intent intent = new Intent(this, ScanQRCodeResultActivity.class);
+                intent.putExtra("result", result);
+                startActivity(intent);
+            }
+        }
     }
 
     @Override

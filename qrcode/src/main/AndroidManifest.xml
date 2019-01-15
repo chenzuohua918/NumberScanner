@@ -3,8 +3,10 @@
     package="com.example.qrcode">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -23,7 +25,7 @@
             android:name=".activity.ScanBarCodeActivity"
             android:label="@string/scan_barcode" />
         <activity
-            android:name=".activity.SimpleBarCodeActivity"
+            android:name=".activity.ScanBarCodeResultActivity"
             android:label="@string/scan_result" />
         <activity
             android:name=".activity.ScanGoodsBarCodeActivity"
@@ -31,6 +33,16 @@
         <activity
             android:name=".activity.GoodsInfoActivity"
             android:label="@string/goods_info" />
+        <activity
+            android:name=".activity.ScanQRCodeActivity"
+            android:label="@string/scan_qrcode" />
+        <activity
+            android:name=".activity.ScanQRCodeResultActivity"
+            android:label="@string/scan_result" />
+        <activity
+            android:name=".activity.ScanExpressActivity"
+            android:label="@string/search"
+            android:theme="@style/NoActionBarActivity" />
     </application>
 
 </manifest>

@@ -8,4 +8,5 @@
     <string name="scan_goods_barcode">扫描商品条形码</string>
     <string name="scan_result">扫描结果</string>
     <string name="goods_info">商品信息</string>
+    <string name="search">搜索</string>
 </resources>
