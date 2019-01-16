@@ -43,6 +43,11 @@
             android:name=".activity.ScanExpressActivity"
             android:label="@string/search"
             android:theme="@style/NoActionBarActivity" />
+        <activity
+            android:name=".activity.ScanExpressBarCodeActivity"
+            android:label="@string/scan_express" />
+        <activity android:name=".activity.ExpressDetailActivity"
+            android:label="@string/express_detail"/>
     </application>
 
 </manifest>

@@ -9,4 +9,5 @@
     <string name="scan_result">扫描结果</string>
     <string name="goods_info">商品信息</string>
     <string name="search">搜索</string>
+    <string name="express_detail">物流详情</string>
 </resources>

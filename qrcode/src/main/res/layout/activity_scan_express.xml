@@ -9,9 +9,28 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary" />
 
-    <com.example.qrcode.view.FlowLayout
-        android:id="@+id/flowlayout"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar" />
+        android:layout_above="@+id/ib_camera"
+        android:layout_below="@id/toolbar">
+
+        <com.example.qrcode.view.FlowLayout
+            android:id="@+id/flowlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
+
+    <ImageButton
+        android:id="@+id/ib_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/selector_purple_circle_button"
+        android:onClick="intent2ScanExpress"
+        android:padding="15dp"
+        android:src="@mipmap/icon_camera" />
 </RelativeLayout>

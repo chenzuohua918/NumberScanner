@@ -1,16 +1,19 @@
 package com.example.qrcode.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +35,7 @@ public class ScanExpressActivity extends AppCompatActivity {
     private InputMethodManager imm;
     private int[] mFlowItemBackground = {R.drawable.selector_red_corners_button, R.drawable.selector_yellow_corners_button,
             R.drawable.selector_purple_corners_button, R.drawable.selector_purple_corners_button};
+    private ImageButton mIbCamera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +80,7 @@ public class ScanExpressActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_scan_express, menu);// 指定Toolbar上的视图文件
         MenuItem searchItem = menu.findItem(R.id.ab_search);
         final SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        mSearchView.setInputType(InputType.TYPE_CLASS_NUMBER);
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {// 输入完成后，提交时触发的方法，一般情况是点击输入法中的搜索按钮才会触发。表示现在正式提交了
@@ -83,7 +88,7 @@ public class ScanExpressActivity extends AppCompatActivity {
                     ExpressDBManager.getInstance().insertExpress(new ExpressScanHistory(s));
                     refreshScanHistory();
                 }
-                imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                intent2ExpressDetail(s);
                 return true;
             }
 
@@ -95,7 +100,7 @@ public class ScanExpressActivity extends AppCompatActivity {
         MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem menuItem) {
-                imm.showSoftInput(mSearchView, InputMethodManager.SHOW_IMPLICIT);
+                showSoftInput();
                 return true;
             }
 
@@ -124,7 +129,27 @@ public class ScanExpressActivity extends AppCompatActivity {
             int pos = view.getId();
             ExpressScanHistory history = historyList.get(pos);
             Logcat.d(TAG, "click express num = " + history.express_num);
-
+            intent2ExpressDetail(history.express_num);
         }
     };
+
+    public void intent2ScanExpress(View view) {
+        startActivity(new Intent(this, ScanExpressBarCodeActivity.class));
+    }
+
+    private void intent2ExpressDetail(String express_num) {
+        hideSoftInput();
+
+        Intent intent = new Intent(ScanExpressActivity.this, ExpressDetailActivity.class);
+        intent.putExtra("result", express_num);
+        startActivity(intent);
+    }
+
+    private void showSoftInput() {
+        imm.showSoftInput(mToolbar, InputMethodManager.SHOW_IMPLICIT);
+    }
+
+    private void hideSoftInput() {
+        imm.hideSoftInputFromWindow(mToolbar.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
 }
