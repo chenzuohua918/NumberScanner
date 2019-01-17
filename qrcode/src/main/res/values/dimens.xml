@@ -2,4 +2,6 @@
 <resources>
     <dimen name="flowlayout_item_padding">5dp</dimen>
     <dimen name="flowlayout_item_margin">8dp</dimen>
+    <dimen name="express_dynamic_dot_gray_radius">10dp</dimen>
+    <dimen name="express_dynamic_dot_red_radius">15dp</dimen>
 </resources>

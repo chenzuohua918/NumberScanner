@@ -24,10 +24,10 @@ public class Express100API {
     public static String ReqUrl = "http://www.kuaidi100.com/query?type=快递公司标识码&postid=运单号";
 
     public void queryExpressInfoByKuaidi100(final String expressNo, final OnRequestExpressInfoListener listener) {
-        new AsyncTask<Void, Void, List<ExpressDynamic>>() {
+        new AsyncTask<String, String, List<ExpressDynamic>>() {
 
             @Override
-            protected List<ExpressDynamic> doInBackground(Void... voids) {
+            protected List<ExpressDynamic> doInBackground(String... strings) {
                 try {
                     if (TextUtils.isEmpty(expressNo)) {
                         return null;
@@ -41,6 +41,10 @@ public class Express100API {
                     }
                     JSONObject typeObject = (JSONObject) typeDataArray.get(0);
                     String type = typeObject.getString("comCode");
+                    if (TextUtils.isEmpty(type)) {
+                        return null;
+                    }
+                    publishProgress(type);// 通知获取到快递公司编号
                     // 2.通过快递公司及快递单号获取物流信息。
                     String kuaidiResult = getResponse("http://www.kuaidi100.com/query?type=" + type + "&postid=" + expressNo);
                     JSONObject jsonObject = new JSONObject(kuaidiResult);
@@ -64,13 +68,21 @@ public class Express100API {
             }
 
             @Override
+            protected void onProgressUpdate(String... values) {
+                super.onProgressUpdate(values);
+                if (null != listener) {
+                    listener.onResponseComCode(values[0]);
+                }
+            }
+
+            @Override
             protected void onPostExecute(List<ExpressDynamic> list) {
                 super.onPostExecute(list);
                 if (null != listener) {
                     if (null == list) {
                         listener.onErrorResponse();
                     } else {
-                        listener.onResponse(list);
+                        listener.onResponseDynamic(list);
                     }
                 }
             }

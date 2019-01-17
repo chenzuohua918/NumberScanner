@@ -49,7 +49,11 @@ public class ScanExpressActivity extends AppCompatActivity {
         imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
         mFlowLayout = findViewById(R.id.flowlayout);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         refreshScanHistory();
     }
 
@@ -81,13 +85,11 @@ public class ScanExpressActivity extends AppCompatActivity {
         MenuItem searchItem = menu.findItem(R.id.ab_search);
         final SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         mSearchView.setInputType(InputType.TYPE_CLASS_NUMBER);
+
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {// 输入完成后，提交时触发的方法，一般情况是点击输入法中的搜索按钮才会触发。表示现在正式提交了
-                if (!TextUtils.isEmpty(s)) {
-                    ExpressDBManager.getInstance().insertExpress(new ExpressScanHistory(s));
-                    refreshScanHistory();
-                }
+                mSearchView.onActionViewCollapsed();// 收起搜索框
                 intent2ExpressDetail(s);
                 return true;
             }

@@ -12,4 +12,9 @@
     <color name="purple_light">#ac70f6</color>
     <color name="blue_dark">#14abfe</color>
     <color name="blue_light">#0bc1ff</color>
+
+    <color name="color_222">#222</color>
+    <color name="color_939393">#939393</color>
+    <color name="color_494949">#494949</color>
+    <color name="color_c2c2c2">#c2c2c2</color>
 </resources>
