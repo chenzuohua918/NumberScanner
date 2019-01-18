@@ -3,22 +3,18 @@ package com.example.qrcode.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.text.InputType;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.qrcode.R;
+import com.example.qrcode.base.BaseActivity;
 import com.example.qrcode.bean.ExpressScanHistory;
 import com.example.qrcode.dao.ExpressDBManager;
 import com.example.qrcode.utils.Logcat;
@@ -26,26 +22,22 @@ import com.example.qrcode.view.FlowLayout;
 
 import java.util.List;
 
-public class ScanExpressActivity extends AppCompatActivity {
+public class ScanExpressActivity extends BaseActivity {
     private static final String TAG = ScanExpressActivity.class.getSimpleName();
 
-    private Toolbar mToolbar;
     private FlowLayout mFlowLayout;
     private List<ExpressScanHistory> historyList;
     private InputMethodManager imm;
     private int[] mFlowItemBackground = {R.drawable.selector_red_corners_button, R.drawable.selector_yellow_corners_button,
             R.drawable.selector_purple_corners_button, R.drawable.selector_purple_corners_button};
-    private ImageButton mIbCamera;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan_express);
+    public int getLayoutId() {
+        return R.layout.activity_scan_express;
+    }
 
-        mToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+    @Override
+    public void onViewCreated(Bundle savedInstanceState) {
         imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
         mFlowLayout = findViewById(R.id.flowlayout);
@@ -114,17 +106,6 @@ public class ScanExpressActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();// 真正实现回退功能的代码
-            default:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private View.OnClickListener mFlowLayoutClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -148,10 +129,10 @@ public class ScanExpressActivity extends AppCompatActivity {
     }
 
     private void showSoftInput() {
-        imm.showSoftInput(mToolbar, InputMethodManager.SHOW_IMPLICIT);
+        imm.showSoftInput(mFlowLayout, InputMethodManager.SHOW_IMPLICIT);
     }
 
     private void hideSoftInput() {
-        imm.hideSoftInputFromWindow(mToolbar.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        imm.hideSoftInputFromWindow(mFlowLayout.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }

@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -20,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.qrcode.R;
 import com.example.qrcode.adapter.ShopAdapter;
+import com.example.qrcode.base.BaseActivity;
 import com.example.qrcode.bean.Shop;
 import com.example.qrcode.utils.GoodsErrorCode;
 import com.example.qrcode.utils.Logcat;
@@ -34,7 +34,7 @@ import java.util.List;
 import cn.bingoogolapple.qrcode.core.BGAQRCodeUtil;
 import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder;
 
-public class GoodsInfoActivity extends AppCompatActivity {
+public class GoodsInfoActivity extends BaseActivity {
     private static final String TAG = GoodsInfoActivity.class.getSimpleName();
 
     private ImageView mIvBarCode;
@@ -43,10 +43,12 @@ public class GoodsInfoActivity extends AppCompatActivity {
     private ShopAdapter mShopAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_goods_info);
+    public int getLayoutId() {
+        return R.layout.activity_goods_info;
+    }
 
+    @Override
+    public void onViewCreated(Bundle savedInstanceState) {
         mIvBarCode = findViewById(R.id.iv_barcode);
         mGoodsInfo = findViewById(R.id.tv_goods_info);
         mRvShop = findViewById(R.id.recycler_shop);

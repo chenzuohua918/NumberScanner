@@ -3,25 +3,27 @@ package com.example.qrcode.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
 import com.example.qrcode.R;
+import com.example.qrcode.base.BaseActivity;
 import com.example.qrcode.utils.Logcat;
 
 import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zxing.ZXingView;
 
-public class ScanQRCodeActivity extends AppCompatActivity implements QRCodeView.Delegate {
+public class ScanQRCodeActivity extends BaseActivity implements QRCodeView.Delegate {
     private static final String TAG = ScanQRCodeActivity.class.getSimpleName();
 
     private ZXingView mZXingView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan_qrcode);
+    public int getLayoutId() {
+        return R.layout.activity_scan_qrcode;
+    }
 
+    @Override
+    public void onViewCreated(Bundle savedInstanceState) {
         mZXingView = findViewById(R.id.zxingview);
         mZXingView.setDelegate(this);
     }

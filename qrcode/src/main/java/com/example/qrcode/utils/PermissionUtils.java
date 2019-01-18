@@ -1,34 +1,16 @@
 package com.example.qrcode.utils;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 
 public class PermissionUtils {
-    private static PermissionUtils instance;
+    public static final int REQUEST_CODE_CAMERA = 1;
 
-    private Activity mActivity;
-
-    private PermissionUtils() {}
-
-    private static synchronized void syncInit() {
-        if (null == instance) {
-            instance = new PermissionUtils();
-        }
+    public static boolean checkSelfPermission(Activity activity, String permission) {
+        return activity.checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED;
     }
 
-    public static PermissionUtils getInstance() {
-        if (null == instance) {
-            syncInit();
-        }
-        return instance;
-    }
-
-    public void init(Activity activity) {
-        this.mActivity = activity;
-    }
-
-    public boolean checkSelfPermission(String permission) {
-        return mActivity.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED;
+    public static void requestPermissions(Activity activity, String[] permission, int requestCode) {
+        activity.requestPermissions(permission, requestCode);
     }
 }

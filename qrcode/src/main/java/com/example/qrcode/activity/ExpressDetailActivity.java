@@ -1,22 +1,18 @@
 package com.example.qrcode.activity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.qrcode.R;
 import com.example.qrcode.adapter.ExpressDynamicAdapter;
+import com.example.qrcode.base.BaseActivity;
 import com.example.qrcode.bean.ExpressDynamic;
 import com.example.qrcode.bean.ExpressScanHistory;
 import com.example.qrcode.dao.ExpressDBManager;
@@ -27,10 +23,9 @@ import com.example.qrcode.view.CircleImageView;
 
 import java.util.List;
 
-public class ExpressDetailActivity extends AppCompatActivity {
+public class ExpressDetailActivity extends BaseActivity {
     private static final String TAG = ExpressDetailActivity.class.getSimpleName();
 
-    private Toolbar mToolbar;
     private CircleImageView mCivCompany;
     private TextView mTvCompany, mTvExpressNo;
     private RecyclerView mRvExpressDynamic;
@@ -39,14 +34,12 @@ public class ExpressDetailActivity extends AppCompatActivity {
     private TextView mTvEmpty;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_express_detail);
+    public int getLayoutId() {
+        return R.layout.activity_express_detail;
+    }
 
-        mToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+    @Override
+    public void onViewCreated(Bundle savedInstanceState) {
         mCivCompany = findViewById(R.id.civ_company);
         mTvCompany = findViewById(R.id.tv_company);
         mTvExpressNo = findViewById(R.id.tv_express_no);
@@ -111,16 +104,5 @@ public class ExpressDetailActivity extends AppCompatActivity {
     private void expressDynamicListEmpty(boolean empty) {
         mRvExpressDynamic.setVisibility(empty ? View.GONE : View.VISIBLE);
         mTvEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();// 真正实现回退功能的代码
-            default:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

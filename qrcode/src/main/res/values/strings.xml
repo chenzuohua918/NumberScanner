@@ -10,4 +10,5 @@
     <string name="goods_info">商品信息</string>
     <string name="search">搜索</string>
     <string name="express_detail">物流详情</string>
+    <string name="exit_toast">再按一次退出</string>
 </resources>

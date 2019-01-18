@@ -4,26 +4,28 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.qrcode.R;
+import com.example.qrcode.base.BaseActivity;
 
 import cn.bingoogolapple.qrcode.core.BGAQRCodeUtil;
 import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder;
 
-public class ScanQRCodeResultActivity extends AppCompatActivity {
+public class ScanQRCodeResultActivity extends BaseActivity {
     private ImageView mImageView;
     private TextView mTvResult;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qrcode_result);
+    public int getLayoutId() {
+        return R.layout.activity_qrcode_result;
+    }
 
+    @Override
+    public void onViewCreated(Bundle savedInstanceState) {
         mImageView = findViewById(R.id.iv_qrcode);
         mTvResult = findViewById(R.id.tv_result);
 
