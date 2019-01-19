@@ -103,8 +103,8 @@ public class ExpressCompanyModel {
         mExpressCompanyList.add(new ExpressCompany("yafengsudi", "亚风速递"));
         mExpressCompanyList.add(new ExpressCompany("yibangwuliu", "一邦速递"));
         mExpressCompanyList.add(new ExpressCompany("youshuwuliu", "优速物流"));
-        mExpressCompanyList.add(new ExpressCompany("youzhengguonei", "邮政包裹挂号信"));
-        mExpressCompanyList.add(new ExpressCompany("youzhengguoji", "邮政国际包裹挂号信"));
+        mExpressCompanyList.add(new ExpressCompany("youzhengguonei", "邮政包裹"));
+        mExpressCompanyList.add(new ExpressCompany("youzhengguoji", "邮政国际包裹"));
         mExpressCompanyList.add(new ExpressCompany("yuanchengwuliu", "远成物流"));
         mExpressCompanyList.add(new ExpressCompany("yuantong", "圆通速递"));
         mExpressCompanyList.add(new ExpressCompany("yuanweifeng", "源伟丰快递"));
