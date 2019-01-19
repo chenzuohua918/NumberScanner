@@ -59,12 +59,15 @@ public class ExpressDBManager {
             while (cursor.moveToNext()) {
                 data.add(new ExpressScanHistory(cursor.getString(cursor.getColumnIndex(ExpressDBHelper.EXPRESS_NUM))));
             }
+            cursor.close();
         }
         return data;
     }
 
     public boolean existExpress(ExpressScanHistory history) {
         Cursor cursor = mDatabase.query(ExpressDBHelper.TABLE_NAME, null, ExpressDBHelper.EXPRESS_NUM + " = ?", new String[]{history.express_num}, null, null, null);
-        return cursor.getCount() > 0;
+        int count = cursor.getCount();
+        cursor.close();
+        return count > 0;
     }
 }
