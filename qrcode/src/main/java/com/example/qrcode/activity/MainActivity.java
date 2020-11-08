@@ -5,17 +5,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.qrcode.R;
 import com.example.qrcode.base.BaseActivity;
 import com.example.qrcode.utils.PermissionUtils;
 
 public class MainActivity extends BaseActivity {
-    private long exitTime = 0;
 
     @Override
     public int getLayoutId() {
@@ -58,20 +54,6 @@ public class MainActivity extends BaseActivity {
             default:
                 break;
         }
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            if (System.currentTimeMillis() - exitTime > 2000) {
-                Toast.makeText(this, R.string.exit_toast, Toast.LENGTH_SHORT).show();
-                exitTime = System.currentTimeMillis();
-            } else {
-                finish();
-            }
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
     }
 
     public void scanBarCode(View view) {
